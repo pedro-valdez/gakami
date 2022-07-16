@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 
 export default function Shelf({ mangas, title }) {
@@ -10,19 +11,21 @@ export default function Shelf({ mangas, title }) {
         <div className='mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
           {
             mangas.map(manga => (
-              <article className='card' key={manga.id}>
-                <figure>
-                  <Image
-                    src={manga.coverArt.src}
-                    alt={manga.coverArt.alt}
-                    width={600}
-                    height={900}
-                  />
-                </figure>
-                <div className='card-body'>
-                  <h1 className='card-title'>{manga.title}</h1>
-                </div>
-              </article>
+              <Link href={`manga/${manga.id}`} key={manga.id}>
+                <article className='card'>
+                  <figure>
+                    <Image
+                      src={manga.coverArt.src}
+                      alt={manga.coverArt.alt}
+                      width={600}
+                      height={900}
+                    />
+                  </figure>
+                  <div className='card-body'>
+                    <h1 className='card-title'>{manga.title}</h1>
+                  </div>
+                </article>
+              </Link>
             ))
           }
         </div>
