@@ -5,8 +5,8 @@ import { useState } from 'react'
 
 export default function Shelf({ mangas, title }) {
   return (
-    <section>
-      <div className='carousel h-screen'>
+    <section className='h-full'>
+      <div className='carousel h-full'>
         { mangas.map(manga => <ShelfItem manga={manga} key={manga.id}/>) }
       </div>
     </section>
@@ -36,7 +36,7 @@ function ShelfItem({ manga }) {
       >
         <div
           onClick={() => setExpand(!expand)}
-          className='card-body max-h-screen overflow-y-scroll text-white'>
+          className='card-body max-h-full overflow-y-scroll text-white'>
           <h1
             className={`card-title 
             ${expand ? 'line-clamp-none' : 'line-clamp-1'}`}
