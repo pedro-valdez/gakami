@@ -1,10 +1,12 @@
+import Hero from '../components/Hero'
 import Shelf from '../components/Shelf'
 import { getSeasonalMangaList } from '../lib/fetching/mangadex'
 
 
 export default function Home({ seasonal }) {
   return (
-    <main>
+    <main className='h-full'>
+      <Hero />
       <Shelf mangas={seasonal} title={'Seasonal'} />
     </main>
   )
