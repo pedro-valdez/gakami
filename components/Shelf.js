@@ -1,35 +1,55 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
 
 
 export default function Shelf({ mangas, title }) {
   return (
     <section>
-      <div className='max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8'>
-        <h2 className='text-2xl font-extrabold tracking-tight'>{title}</h2>
-
-        <div className='mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
-          {
-            mangas.map(manga => (
-              <Link href={`manga/${manga.id}`} key={manga.id}>
-                <article className='card'>
-                  <figure>
-                    <Image
-                      src={manga.coverArt.src}
-                      alt={manga.coverArt.alt}
-                      width={600}
-                      height={900}
-                    />
-                  </figure>
-                  <div className='card-body'>
-                    <h1 className='card-title'>{manga.title}</h1>
-                  </div>
-                </article>
-              </Link>
-            ))
-          }
-        </div>
+      <div className='carousel h-screen'>
+        { mangas.map(manga => <ShelfItem manga={manga} key={manga.id}/>) }
       </div>
     </section>
+  )
+}
+
+function ShelfItem({ manga }) {
+  const [expand, setExpand] = useState(false)
+
+  return (
+    <article className='carousel-item h-full w-full card rounded-none relative'>
+      <Image
+        src={manga.coverArt.src}
+        alt={manga.coverArt.alt}
+        layout='fill'
+        objectFit='cover'
+      />
+      <div
+        className={`absolute bottom-0 bg-gradient-to-t break-words w-full 
+        ${expand 
+          ? `from-black/80 to-black/60 
+          before:absolute before:py-8 before:top-0 
+          before:-translate-y-full before:w-full 
+          before:bg-gradient-to-t before:from-black/60`
+          : 'pt-16 from-black/60'}
+        `}
+      >
+        <div
+          onClick={() => setExpand(!expand)}
+          className='card-body max-h-screen overflow-y-scroll text-white'>
+          <h1
+            className={`card-title 
+            ${expand ? 'line-clamp-none' : 'line-clamp-1'}`}
+          >
+            { manga.title }
+          </h1>
+          <p
+            className={`${expand ? 'line-clamp-none' : 'line-clamp-2'}`}
+          >
+            { manga.description }
+          </p>
+        </div>
+      </div>
+    </article>
   )
 }
