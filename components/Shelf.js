@@ -5,7 +5,10 @@ import { useState } from 'react'
 
 export default function Shelf({ mangas, title }) {
   return (
-    <section className='h-full'>
+    <section className='h-full relative'>
+      <div className='absolute z-20 w-full px-8 py-4 bg-gradient-to-b from-black/60'>
+        <h2 className='text-white font-bold text-lg'>{title}</h2>
+      </div>
       <div className='carousel h-full'>
         { mangas.map(manga => <ShelfItem manga={manga} key={manga.id}/>) }
       </div>
