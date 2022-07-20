@@ -1,10 +1,10 @@
-import useSWR from 'swr'
+import useSWRImmutable from 'swr/immutable'
 import { getMangaList } from '../lib/fetching/mangadex'
 import Shelf from './Shelf'
 
 
 export default function LatestUpdates() {
-  const { data: mangas, error } = useSWR({
+  const { data: mangas, error } = useSWRImmutable({
     params: {
       includes: ['cover_art'],
       'order[latestUploadedChapter]': 'desc',
