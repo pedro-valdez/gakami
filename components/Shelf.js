@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import Feed from './Feed'
 
 
 export default function Shelf({ mangas, title }) {
@@ -18,6 +19,7 @@ export default function Shelf({ mangas, title }) {
 
 function ShelfItem({ manga }) {
   const [expand, setExpand] = useState(false)
+  const [showFeed, setShowFeed] = useState(false)
 
   return (
     <article className='carousel-item h-full w-full card rounded-none relative'>
@@ -26,6 +28,7 @@ function ShelfItem({ manga }) {
         alt={manga.coverArt.alt}
         layout='fill'
         objectFit='cover'
+        onClick={() => setShowFeed(true)}
       />
       <div
         className={`absolute bottom-0 bg-gradient-to-t break-words w-full 
@@ -53,6 +56,8 @@ function ShelfItem({ manga }) {
           </p>
         </div>
       </div>
+
+      { showFeed ? <Feed id={manga.id} title={manga.title} show={setShowFeed}/> : <></> }
     </article>
   )
 }
