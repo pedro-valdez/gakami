@@ -42,11 +42,11 @@ export default function Feed({ id, title, show }) {
         {
           feed.map(chapter => (
             <Link href={`chapter/${chapter.id}`} key={chapter.id}>
-              <div className='flex w-full'>
+              <article className='flex w-full'>
                 <p className='basis-full'>{ chapter.chapterNumber }</p>
                 <p className='basis-full'>{ chapter.username }</p>
                 <p className='basis-full'>{ chapter.scanlationGroup }</p>
-              </div>
+              </article>
             </Link>
           ))
         }
