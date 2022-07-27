@@ -43,12 +43,12 @@ function ShelfItem({ manga }) {
         <div
           onClick={() => setExpand(!expand)}
           className='card-body max-h-full overflow-y-scroll text-white'>
-          <h1
+          <h3
             className={`card-title 
             ${expand ? 'line-clamp-none' : 'line-clamp-1'}`}
           >
             { manga.title }
-          </h1>
+          </h3>
           <p
             className={`${expand ? 'line-clamp-none' : 'line-clamp-2'}`}
           >
