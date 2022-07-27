@@ -1,6 +1,7 @@
 import useSWRImmutable from 'swr/immutable'
 import { getMangaFeed } from '../lib/fetching/mangadex'
 import Link from 'next/link'
+import { FiArrowLeft } from 'react-icons/fi'
 
 
 export default function Feed({ id, title, show }) {
@@ -27,29 +28,39 @@ export default function Feed({ id, title, show }) {
   }
 
   return (
-    <section className='absolute h-full w-full z-20 bg-base-100'>
-      <header>
-        <h3>{ title }</h3>
-        <button onClick={() => show(false)}>x</button>
-      </header>
+    <section className="w-full h-full bg-base-100 absolute z-20">
+      <div className="card h-full">
+        <div className="card-body h-full">
+          <header className="mb-2 card-title w-full break-words flex justify-between gap-x-4">
+            <h4>{title}</h4>
+            <button onClick={() => show(false)}>
+              <FiArrowLeft />
+            </button>
+          </header>
 
-      <div>
-        <div className='flex w-full'>
-          <p className='basis-full'>Chapter</p>
-          <p className='basis-full'>User</p>
-          <p className='basis-full'>Scanlation</p>
+          <div className="overflow-y-scroll">
+            <table className="table table-fixed w-full">
+              <thead>
+                <tr>
+                  <th className="whitespace-normal break-words">Chapter</th>
+                  <th className="whitespace-normal break-words">User</th>
+                  <th className="whitespace-normal break-words">Scanlation</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  feed.map(chapter => (
+                  <tr key={chapter.id}>
+                    <td className="whitespace-normal break-words">{chapter.chapterNumber}</td>
+                    <td className="whitespace-normal break-words">{chapter.username}</td>
+                    <td className="whitespace-normal break-words">{chapter.scanlationGroup}</td>
+                  </tr>
+                  ))
+                }
+              </tbody>
+            </table>
+          </div>
         </div>
-        {
-          feed.map(chapter => (
-            <Link href={`chapter/${chapter.id}`} key={chapter.id}>
-              <article className='flex w-full'>
-                <p className='basis-full'>{ chapter.chapterNumber }</p>
-                <p className='basis-full'>{ chapter.username }</p>
-                <p className='basis-full'>{ chapter.scanlationGroup }</p>
-              </article>
-            </Link>
-          ))
-        }
       </div>
     </section>
   )
